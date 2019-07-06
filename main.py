@@ -1,8 +1,6 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
 import dotenv
 import os
-import dialogflow_v2 as dialogflow
 import vk_bot
 import tg_bot
 
@@ -20,7 +18,7 @@ def main():
 
     tg_bot.run_tg_bot(TOKEN_TG, PROJECT_ID)
 
-    vk_bot.run_vk_bot(TOKEN_VK)
+    vk_bot.run_vk_bot(TOKEN_VK, PROJECT_ID)
 
 
 

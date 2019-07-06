@@ -32,7 +32,7 @@ def train(project_id):
         create_intent(project_id, intent_name, intent['questions'], intent['answer'])
 
 
-def detect_intent_texts(project_id, session_id, texts, language_code):
+def get_answer(project_id, session_id, texts, language_code):
     """Returns the result of detect intent with texts as inputs.
     Using the same `session_id` between requests allows continuation
     of the conversation."""
