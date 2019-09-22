@@ -1,13 +1,21 @@
 import json
+import os
+
 import dialogflow_v2 as dialogflow
+import dotenv
+
+dotenv.load_dotenv()
+PROJECT_ID = os.environ['project_id']
+credential_path = u'C:/Users/Георгий/PycharmProjects/dialogflow/df-ttebpp-0a91efe3f565.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
 
-def create_intent(project_id, display_name, training_phrases_parts, message_texts):
+def create_intent(display_name, training_phrases_parts, message_texts):
     """Create an intent of the given intent type."""
 
     intents_client = dialogflow.IntentsClient()
 
-    parent = intents_client.project_agent_path(project_id)
+    parent = intents_client.project_agent_path(PROJECT_ID)
     training_phrases = []
     for training_phrases_part in training_phrases_parts:
         part = dialogflow.types.Intent.TrainingPhrase.Part(
@@ -25,21 +33,21 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
     intents_client.create_intent(parent, intent)
 
 
-def train(project_id):
+def train():
     with open("questions.json", "r", encoding='utf-8') as my_file:
         training_data = json.load(my_file)
     for intent_name, intent in training_data.items():
-        create_intent(project_id, intent_name, intent['questions'], intent['answer'])
+        create_intent(PROJECT_ID, intent_name, intent['questions'], intent['answer'])
 
 
-def get_answer(project_id, session_id, texts, language_code):
+def get_answer(session_id, texts, language_code):
     """Returns the result of detect intent with texts as inputs.
     Using the same `session_id` between requests allows continuation
     of the conversation."""
 
     session_client = dialogflow.SessionsClient()
 
-    session = session_client.session_path(project_id, session_id)
+    session = session_client.session_path(PROJECT_ID, session_id)
     print('Session path: {}\n'.format(session))
 
     for text in texts:
@@ -51,4 +59,4 @@ def get_answer(project_id, session_id, texts, language_code):
         response = session_client.detect_intent(
             session=session, query_input=query_input)
 
-    return response.query_result.fulfillment_text
+    return response.query_result.fulfillment_text, response.query_result.intent
