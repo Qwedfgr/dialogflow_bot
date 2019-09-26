@@ -6,8 +6,6 @@ import dotenv
 
 dotenv.load_dotenv()
 PROJECT_ID = os.environ['project_id']
-credential_path = u'C:/Users/Георгий/PycharmProjects/dialogflow/df-ttebpp-0a91efe3f565.json'
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
 
 def create_intent(display_name, training_phrases_parts, message_texts):
