@@ -1,8 +1,8 @@
+import logging
 import os
 import random
 
 import dotenv
-import logging
 import telegram
 from vk_api import VkApi
 from vk_api.longpoll import VkLongPoll, VkEventType

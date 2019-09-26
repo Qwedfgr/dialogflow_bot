@@ -1,7 +1,7 @@
+import logging
 import os
 
 import dotenv
-import logging
 import telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -32,9 +32,9 @@ def main():
 def run_tg_bot(token_tg):
     updater = Updater(token_tg)
 
-    dp = updater.dispatcher
-    dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(MessageHandler(Filters.text, dialog))
+    dispatcher = updater.dispatcher
+    dispatcher.add_handler(CommandHandler("start", start))
+    dispatcher.add_handler(MessageHandler(Filters.text, dialog))
 
     logger.info('Бот для телеграма запущен')
     updater.start_polling()
