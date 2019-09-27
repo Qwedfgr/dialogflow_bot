@@ -21,7 +21,7 @@ pip install -r requirements.txt
 ```python
 python tg_bot.py
 ```
-Для запуска бота в телеграме:
+Для запуска бота в ВК:
 
 ```python
 python vk_bot.py
